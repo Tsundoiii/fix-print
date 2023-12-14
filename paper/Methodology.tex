@@ -1,11 +1,12 @@
 \section{Methodology}
+This is an experimental qualitative study.
 \subsection{Software}
 \subsubsection{Coq}
-Coq is a theorem proving software made by Inria, a French-government supported computer science research institute. Coq was chosen due to its use in previous research into formally verified code translators \autocite{Roziere}\autocite{Zhao}.
+Coq is a theorem proving software made by Inria, a French government-supported computer science research institute. Coq was chosen due to its use in previous research into formally verified code translators \autocite{Roziere}\autocite{Zhao}.
 \subsubsection{Python}
 Python 2.7.18 was chosen as the source language for Transpyler due to it being the latest release of Python 2. Python 3.9.17 was chosen as the target language due to Python 3.9 being the latest Python 3 version supported by 2to3 \autocite{2to3}.
 \subsection{Creation}
-(i want to sleep rn, will do later i promise (maybe))
+Each fixer included in 2to3 was 
 \subsection{Evaluation}
 \subsubsection{Metric}
 The metric used for evaluating the effectiveness of Transpyler was \textit{computational accuracy}, a metric devised by Roziere et al. in their evaluation of their AI-based code translator \autocite{Roziere}. Output code is considered computationally accurate if it outputs the same result as the input. Computational accuracy was chosen as the method of evaluation over bilingual evaluation understudy (BLEU), a method of evaluating the accuracy of natural language machine translators that has also been used to evaluate the effectives of machine code translators. BLEU is a measure of the similarity of a translator's output to some 'correct' reference translations of the same input. Although BLEU has been used the metric by which past code translation research have evaluated their translators, it is unsuitable as a metric to evaluate code translators due to the fact that small differences between output code and correct code, such as typos or lack of one or two characters, may result in code that produces different output or which does not run at all, yet despite that would still attain high BLEU scores due to its similarity with the correct reference code \autocite{Roziere}. As such, computational accuracy is a much preferable metric to measure the correctness of output code.
