@@ -1,0 +1,13 @@
+\section{Methodology}
+\subsection{Software}
+\subsubsection{Coq}
+Coq is a theorem proving software made by Inria, a French-government supported computer science research institute. Coq was chosen due to its use in previous research into formally verified code translators \autocite{Roziere}\autocite{Zhao}.
+\subsubsection{Python}
+Python 2.7.18 was chosen as the source language for Transpyler due to it being the latest release of Python 2. Python 3.9.17 was chosen as the target language due to Python 3.9 being the latest Python 3 version supported by 2to3 \autocite{2to3}.
+\subsection{Creation}
+(i want to sleep rn, will do later i promise (maybe))
+\subsection{Evaluation}
+\subsubsection{Metric}
+The metric used for evaluating the effectiveness of Transpyler was \textit{computational accuracy}, a metric devised by Roziere et al. in their evaluation of their AI-based code translator \autocite{Roziere}. Output code is considered computationally accurate if it outputs the same result as the input. Computational accuracy was chosen as the method of evaluation over bilingual evaluation understudy (BLEU), a method of evaluating the accuracy of natural language machine translators that has also been used to evaluate the effectives of machine code translators. BLEU is a measure of the similarity of a translator's output to some 'correct' reference translations of the same input. Although BLEU has been used the metric by which past code translation research have evaluated their translators, it is unsuitable as a metric to evaluate code translators due to the fact that small differences between output code and correct code, such as typos or lack of one or two characters, may result in code that produces different output or which does not run at all, yet despite that would still attain high BLEU scores due to its similarity with the correct reference code \autocite{Roziere}. As such, computational accuracy is a much preferable metric to measure the correctness of output code.
+\subsubsection{Data Collection}
+The effectiveness of Transpyler was evaluated with a test suite of Python 2 functions. A \textit{function} is a specifically defined piece of code that receives an input and returns an output. Each function was translated by Transpyler, then both the original Python 2 function and the generated Python 3 function were run with a set of inputs. For each input, the generated function's computational accuracy (whether it returned the same output that the original Python 2 code did) was recorded, as well as each function's run time.
