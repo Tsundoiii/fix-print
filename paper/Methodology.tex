@@ -8,7 +8,7 @@ Coq is a theorem prover made by Inria, a French government-supported computer sc
 Python 2.7.18 was chosen as the source language for Transpyler due to it being the latest release of Python 2. Python 3.9.17 was chosen as the target language due to Python 3.9 being the latest Python 3 version supported by 2to3 \autocite{2to3}.
 
 \subsection{Creation}
-2to3, the most popular Python 2 to 3 translator to date, is composed of a series of \textit{fixers}, which are individual patterns which are matched, then translated to Python 3 \autocite{2to3}. A list of fixers is included in \ref{appendix:Fixers}
+2to3, the most popular Python 2 to 3 translator to date, is composed of a series of \textit{fixers}, which are individual patterns which are matched, then translated to Python 3 \autocite{2to3}. A list of fixers is included in Appendix \ref{appendix:Fixers}.
 
 To create Transpyler, each fixer in 2to3 was defined in Coq. Then, a theorem about said fixer's correctness was proven in Coq. Coq is mainly a theorem prover and although it does model many programming structures quite well, it is still limited in its ability to create programs, as it not primarily a programming language but rather a theorem prover with programming capabilities. Thus Coq's code extraction capabilities, which allow for the generation of programs in various programming languages that conform to theorems verified in Coq, were used to generate code in the OCaml programming language that is verified to be correct. This approach was also used by Leroy et al. in their development of their formally verified compiler using Coq \autocite{Leroy}.
 
