@@ -1,6 +1,8 @@
+Require Import String.
+
 Inductive leaf : Type :=
 | ENDMARKER : leaf
-| NAME : leaf
+| NAME : string -> leaf
 | NUMBER : leaf
 | STRING : leaf
 | NEWLINE : leaf
@@ -52,7 +54,7 @@ Inductive leaf : Type :=
 | AT : leaf
 | ATEQUAL : leaf
 | OP : leaf
-| COMMENT : leaf
+| COMMENT : string -> leaf
 | NL : leaf
 | RARROW : leaf
 | AWAIT : leaf
