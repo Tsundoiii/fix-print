@@ -62,7 +62,5 @@ Inductive leaf : Type :=
 | ERRORTOKEN : leaf
 | COLONEQUAL : leaf.
 
-Inductive tree : Type :=
-| Leaf : leaf -> tree
-| Node : tree -> tree.
+Definition node := list leaf.
 
