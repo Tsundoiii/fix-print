@@ -1,10 +1,11 @@
 Require Import String.
+Require Import Extraction.
 
 Inductive leaf : Type :=
 | ENDMARKER : leaf
 | NAME : string -> leaf
 | NUMBER : leaf
-| STRING : leaf
+| STRING : string -> leaf
 | NEWLINE : leaf
 | INDENT : leaf
 | DEDENT : leaf
@@ -62,5 +63,7 @@ Inductive leaf : Type :=
 | ERRORTOKEN : leaf
 | COLONEQUAL : leaf.
 
-Definition node := list leaf.
+Definition tree :=
+
+Recursive Extraction node.
 
