@@ -1,4 +1,6 @@
 Require Import String.
+Require Import List.
+Import ListNotations.
 Require Import Extraction.
 
 Inductive leaf : Type :=
@@ -63,7 +65,38 @@ Inductive leaf : Type :=
 | ERRORTOKEN : leaf
 | COLONEQUAL : leaf.
 
-Definition tree :=
+Inductive tree : Type :=
+| LEAF : leaf -> tree
+| NODE : list tree -> tree.
 
-Recursive Extraction node.
+Definition test := NODE [LEAF (NAME "print") ; LEAF RIGHTSHIFT ; LEAF (NAME "test") ; LEAF COMMA ; LEAF (STRING "idk") ; LEAF (STRING "i") ; LEAF COMMA].
+
+
+Definition fix_print (t : tree) :=
+match t with
+| NODE [LEAF (NAME "print") ; n] => NODE [LEAF (NAME "print") ; LEAF LPAR ; n ; LEAF RPAR]
+| NODE [LEAF (NAME "print") ; n; LEAF COMMA] => NODE [LEAF (NAME "print") ; LEAF LPAR ; n ; LEAF COMMA; LEAF (NAME "end") ; LEAF EQUAL ; LEAF (STRING " ") ; LEAF RPAR]
+| NODE [LEAF (NAME "print") ; LEAF RIGHTSHIFT ; LEAF (NAME f) ; LEAF COMMA ; n] => NODE [LEAF (NAME "print") ; LEAF LPAR ; n ; LEAF COMMA; LEAF (NAME "file") ; LEAF EQUAL ; LEAF (NAME f) ; LEAF RPAR]
+| NODE [LEAF (NAME "print") ; LEAF RIGHTSHIFT ; LEAF (NAME f) ; LEAF COMMA ; n; LEAF COMMA] => NODE [LEAF (NAME "print") ; LEAF LPAR ; n ; LEAF COMMA; LEAF (NAME "end") ; LEAF EQUAL ; LEAF (STRING " ") ; LEAF COMMA; LEAF (NAME "file") ; LEAF EQUAL ; LEAF (NAME f) ; LEAF RPAR]
+| _ => t
+end.
+
+Definition node_to_list (n : tree) :=
+match n with
+| NODE [l] => l
+| _ => n
+end.
+
+Eval simpl in node_to_list (test).
+Eval simpl in fix_print (test).
+
+
+Lemma fix_print_end_correctness : forall n , In [LEAF (NAME "end") ; LEAF EQUAL ; LEAF (STRING " ")] node_to_list (fix_print (NODE [LEAF (NAME "print") ; n; LEAF COMMA])).
+Proof.
+
+
+
+(**Extract Inductive bool => "bool" [ "true" "false" ].
+Extract Inductive list => "list" [ "[]" "(::)" ].
+Recursive Extraction tree.**)
 
