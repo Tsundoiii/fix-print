@@ -1,0 +1,4 @@
+Test | Original Code Output | 2to3 Translation | 2to3 Output | 2to3 Output Matches Original Output | 2to3 Run Time | fix_print Translation | fix_print Output | fix_print Output Matches Original Output | fix_print Run Time
+1 | print() | b'\n'
+2 | print("Hello World") | b'Hello World\n'
+3 | print("Hello World", end=' ') | b'Hello World '
