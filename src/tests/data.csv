@@ -1,18 +1,15 @@
-Test | Python 2 Output | 2to3 Translation | 2to3 Output | 2to3 Output Matches Original Output | 2to3 Run Time 1 | 2to3 Run Time 2 | 2to3 Run Time 3 | 2to3 Run Time 4 | 2to3 Run Time 5 | fix_print Translation | fix_print Output | fix_print Output Matches Original Output | fix_print Run Time
-1 | b'\n' | print() | b'\n' | 213 | 231 | 245 | 216 | 211 | 223.2 | True
-2 | b'Hello World\n' | print("Hello World") | b'Hello World\n' | 208 | 204 | 202 | 208 | 208 | 206.0 | True
-3 | b'Hello World\n' | print("Hello World", end=' ') | b'Hello World ' | 207 | 201 | 211 | 206 | 205 | 206.0 | False
-4 | b'HelloWorld\n' | print("Hello" + "World") | b'HelloWorld\n' | 206 | 203 | 215 | 215 | 210 | 209.8 | True
-5 | b'HelloWorld\n' | print("Hello" + "World", end=' ') | b'HelloWorld ' | 241 | 217 | 206 | 204 | 201 | 213.8 | False
-6 | b'0\n' | print(0) | b'0\n' | 201 | 219 | 204 | 199 | 211 | 206.8 | True
-7 | b'1\n' | print(0 + 1) | b'1\n' | 232 | 204 | 202 | 203 | 203 | 208.8 | True
-8 | b'0\n' | print(0, end=' ') | b'0 ' | 204 | 210 | 215 | 208 | 212 | 209.8 | False
-9 | b'1\n' | print(0 + 1, end=' ') | b'1 ' | 213 | 210 | 200 | 198 | 207 | 205.6 | False
-10 | b'Hello World\n' | print("Hello World", file=None) | b'Hello World\n' | 200 | 215 | 207 | 214 | 202 | 207.6 | True
-11 | b'Hello World\n' | print("Hello World", end=' ', file=None) | b'Hello World ' | 205 | 210 | 205 | 203 | 203 | 205.2 | False
-Filetest 1 | b'Hello World\n' | print("Hello World", file=x) | b'Hello World\n' | 210 | 213 | 201 | 207 | 201 | 206.4 | True
-Filetest 2 | b'Hello World' | print("Hello World", end=' ', file=x) | b'Hello World' | 223 | 212 | 208 | 205 | 201 | 209.8 | True
-Filetest 3 | b'HelloWorld\n' | print("Hello" + "World", file=x) | b'HelloWorld\n' | 229 | 201 | 216 | 201 | 203 | 210.0 | True
-Filetest 4 | b'HelloWorld' | print("Hello" + "World", end=' ', file=x) | b'HelloWorld' | 207 | 203 | 210 | 202 | 210 | 206.4 | True
-Filetest 5 | b'Hello World\n' | print("Hello", "World", file=x) | b'Hello World\n' | 199 | 204 | 210 | 214 | 203 | 206.0 | True
-Filetest 6 | b'Hello World' | print("Hello", "World", end=' ', file=x) | b'Hello World' | 212 | 201 | 220 | 228 | 201 | 212.4 | True
+Test                              |Python 2 Output |2to3 Translation                      |2to3 Output |2to3 Output Matches Original Output |2to3 Run Time 1 |2to3 Run Time 2 |2to3 Run Time 3 |2to3 Run Time 4 |2to3 Run Time 5 |fix_print Translation |fix_print Output |fix_print Output Matches Original Output |fix_print Run Time
+test_1                            |b'1 2 3\n'      |print(1, 1+1, 1+1+1)                  |b'1 2 3\n'  |True                                |            381 |            255 |            266 |            267 |            256 |                285.0
+test_2                            |b'1 2\n'        |print(1, 2)                           |b'1 2\n'    |True                                |            253 |            268 |            257 |            244 |            278 |                260.0
+test_3                            |b'\n'           |print()                               |b'\n'       |True                                |            255 |            248 |            261 |            259 |            252 |                255.0
+test_prefix_preservation          |b'1 2 3\n'      |print(1,   1+1,   1+1+1)              |b'1 2 3\n'  |True                                |            259 |            256 |            248 |            263 |            255 |                256.2
+test_trailing_comma_1             |b'1 2 3\n'      |print(1, 2, 3, end=' ')               |b'1 2 3 '   |False                               |            251 |            247 |            269 |            269 |            299 |                267.0
+test_trailing_comma_2             |b'1 2\n'        |print(1, 2, end=' ')                  |b'1 2 '     |False                               |            263 |            284 |            299 |            276 |            248 |                274.0
+test_trailing_comma_3             |b'1\n'          |print(1, end=' ')                     |b'1 '       |False                               |            249 |            253 |            247 |            252 |            250 |                250.2
+test_tuple                        |b''             |print((a, b, c))                      |b''         |True                                |            250 |            248 |            328 |            267 |            303 |                279.2
+test_idempotency-1                |b'()\n'         |print()                               |b'\n'       |False                               |            276 |            273 |            307 |            263 |            372 |                298.2
+test_idempotency-2                |b'\n'           |print('')                             |b'\n'       |True                                |            303 |            303 |            302 |            272 |            254 |                286.8
+test_vargs_without_trailing_comma |b'1 2 3\n'      |print(1, 2, 3, file=sys.stderr)       |b'1 2 3\n'  |True                                |            254 |            253 |            256 |            254 |            254 |                254.2
+test_with_trailing_comma          |b'1 2'          |print(1, 2, end=' ', file=sys.stderr) |b'1 2 '     |False                               |            248 |            251 |            247 |            252 |            258 |                251.2
+test_no_trailing_comma            |b'2\n'          |print(1+1, file=sys.stderr)           |b'2\n'      |True                                |            254 |            249 |            254 |            275 |            247 |                255.8
+test_spaces_before_file           |b'\n'           |print(file=sys.stderr)                |b'\n'       |True                                |            257 |            255 |            248 |            296 |            317 |                274.6
