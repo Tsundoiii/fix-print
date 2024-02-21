@@ -155,7 +155,7 @@ Definition transpile (l : list tree) : string := concat_strings (map to_string (
 Definition test1 := transpile [LEAF (NAME "print")].
 Compute test1.
 
-(**Extract Inductive bool => "bool" [ "true" "false" ].
+Extract Inductive bool => "bool" [ "true" "false" ].
 Extract Inductive list => "list" [ "[]" "(::)" ].
+Extraction "test1.ml" test1 fix_print.
 Recursive Extraction test1.
-
