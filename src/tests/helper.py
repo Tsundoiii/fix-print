@@ -19,9 +19,9 @@ tests = [
     "test_spaces_before_file",
 ]
 
-for test in tests:
-    with open(f"{test}.ml", "a") as testfile:
-        testfile.write("\n" + "let () = print_string test")
+# for test in tests:
+#     with open(f"{test}.ml", "a") as testfile:
+#         testfile.write("\n" + "let () = print_string test")
 
 for file in tests:
     subprocess.run(["ocamlopt", "-o", f"{file}.oc", f"{file}.mli", f"{file}.ml"])

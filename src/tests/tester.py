@@ -2,7 +2,7 @@ import subprocess
 
 datafile = open("data.csv", "w")
 print(
-    "Test | Python 2 Output | 2to3 Translation | 2to3 Output | 2to3 Output Correct | 2to3 Run Time 1 | 2to3 Run Time 2 | 2to3 Run Time 3 | 2to3 Run Time 4 | 2to3 Run Time 5 | 2to3 Average Run Time",
+    "Test | Python 2 Output | 2to3 Translation | 2to3 Output | 2to3 Output Correct | 2to3 Run Time 1 (ms) | 2to3 Run Time 2 (ms) | 2to3 Run Time 3 (ms) | 2to3 Run Time 4 (ms) | 2to3 Run Time 5 (ms) | 2to3 Average Run Time (ms)",
     file=datafile,
 )
 
@@ -163,11 +163,11 @@ for test in file_redirection_tests:
     )
 
 print(
-    "Test | Python 2 Output | fix_print Translation | fix_print Output | fix_print Output Correct | fix_print Run Time 1 | fix_print Run Time 2 | fix_print Run Time 3 | fix_print Run Time 4 | fix_print Run Time 5 | fix_print Average Run Time",
+    "Test | Python 2 Output | fix_print Translation | fix_print Output | fix_print Output Correct | fix_print Run Time 1 (ms) | fix_print Run Time 2 (ms) | fix_print Run Time 3 (ms) | fix_print Run Time 4 (ms) | fix_print Run Time 5 (ms) | fix_print Average Run Time (ms)",
     file=datafile,
 )
 
-for fix_print_test in tests:
+for fix_print_test in regular_tests + idempotency_tests:
     fix_print_runtimes = []
 
     for j in range(5):
@@ -199,5 +199,41 @@ for fix_print_test in tests:
 
     print(
         f"{fix_print_test} | {python_two_output} | {fix_print_translation} | {fix_print_translation_output} | {fix_print_output_correct} | {fix_print_runtimes[0]} | {fix_print_runtimes[1]} | {fix_print_runtimes[2]} | {fix_print_runtimes[3]} | {fix_print_runtimes[4]} | {fix_print_average_runtime}",
+        file=datafile,
+    )
+
+for test in file_redirection_tests:
+    fix_print_runtimes = []
+
+    for j in range(5):
+        python_two_output = subprocess.run(
+            ["python2", test], capture_output=True
+        ).stderr
+
+        fix_print_test_run = subprocess.run(
+            f"time ./{test}.oc",
+            shell=True,
+            executable="/bin/bash",
+            capture_output=True,
+            encoding="utf-8",
+        )
+
+        fix_print_translation = fix_print_test_run.stdout
+
+        for line in fix_print_test_run.stderr.splitlines():
+            if line.startswith("real"):
+                fix_print_runtimes.append(int(line[-4:-1]))
+
+    fix_print_average_runtime = sum(fix_print_runtimes) / 5
+
+    fix_print_translation_output = subprocess.run(
+        ["python", "-c", "import sys;" + fix_print_translation],
+        capture_output=True,
+    ).stderr
+
+    fix_print_output_correct = python_two_output == fix_print_translation_output
+
+    print(
+        f"{test} | {python_two_output} | {fix_print_translation} | {fix_print_translation_output} | {fix_print_output_correct} | {fix_print_runtimes[0]} | {fix_print_runtimes[1]} | {fix_print_runtimes[2]} | {fix_print_runtimes[3]} | {fix_print_runtimes[4]} | {fix_print_average_runtime}",
         file=datafile,
     )
