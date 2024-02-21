@@ -10,6 +10,8 @@ tests = [
     "test_1",
     "test_2",
     "test_3",
+    "test_4",
+    "test_5",
     "test_prefix_preservation",
     "test_trailing_comma_1",
     "test_trailing_comma_2",

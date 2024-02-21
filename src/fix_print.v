@@ -3,6 +3,8 @@ Require Import List.
 Import ListNotations.
 Require Import Coq.Program.Wf.
 Require Import Extraction.
+Require Import ExtrOcamlBasic.
+Require Import ExtrOcamlNativeString.
 
 Inductive leaf : Type :=
 | ENDMARKER : leaf
@@ -152,10 +154,7 @@ end.
 
 Definition transpile (l : list tree) : string := concat_strings (map to_string (fix_print l)).
 
-Definition test1 := transpile [LEAF (NAME "print")].
-Compute test1.
+Definition test_prefix_preservation := transpile [LEAF (NAME "print") ; LEAF (NUMBER "1") ; LEAF COMMA ; LEAF (NUMBER "1") ; LEAF PLUS ; LEAF (NUMBER "1") ; LEAF COMMA ; LEAF (NUMBER "1") ; LEAF PLUS ; LEAF (NUMBER "1") ; LEAF PLUS ; LEAF (NUMBER "1")].
 
-Extract Inductive bool => "bool" [ "true" "false" ].
-Extract Inductive list => "list" [ "[]" "(::)" ].
-Extraction "test1.ml" test1 fix_print.
-Recursive Extraction test1.
+Extraction "test_prefix_preservation.ml" test_prefix_preservation.
+

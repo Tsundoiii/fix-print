@@ -1,15 +1,17 @@
 Test | Python 2 Output | 2to3 Translation | 2to3 Output | 2to3 Output Correct | 2to3 Run Time 1 | 2to3 Run Time 2 | 2to3 Run Time 3 | 2to3 Run Time 4 | 2to3 Run Time 5 | 2to3 Average Run Time | fix_print Translation | fix_print Output | fix_print Output Correct | fix_print Run Time 1 | fix_print Run Time 2 | fix_print Run Time 3 | fix_print Run Time 4 | fix_print Run Time 5 | fix_print Average Run Time
-test_1 | b'1 2 3\n' | print(1, 1+1, 1+1+1) | b'1 2 3\n' | True | 273 | 276 | 258 | 279 | 268 | 270.8
-test_2 | b'1 2\n' | print(1, 2) | b'1 2\n' | True | 257 | 259 | 246 | 243 | 267 | 254.4
-test_3 | b'\n' | print() | b'\n' | True | 274 | 257 | 253 | 260 | 245 | 257.8
-test_prefix_preservation | b'1 2 3\n' | print(1,   1+1,   1+1+1) | b'1 2 3\n' | True | 254 | 255 | 284 | 256 | 261 | 262.0
-test_trailing_comma_1 | b'1 2 3\n' | print(1, 2, 3, end=' ') | b'1 2 3 ' | False | 259 | 252 | 265 | 266 | 269 | 262.2
-test_trailing_comma_2 | b'1 2\n' | print(1, 2, end=' ') | b'1 2 ' | False | 245 | 262 | 266 | 250 | 265 | 257.6
-test_trailing_comma_3 | b'1\n' | print(1, end=' ') | b'1 ' | False | 247 | 243 | 255 | 255 | 244 | 248.8
-test_tuple | b'' | print((a, b, c)) | b'' | True | 260 | 251 | 245 | 264 | 248 | 253.6
-test_idempotency-1 | b'()\n' | print() | b'\n' | False | 256 | 252 | 254 | 244 | 249 | 251.0
-test_idempotency-2 | b'\n' | print('') | b'\n' | True | 255 | 267 | 249 | 268 | 250 | 257.8
-test_vargs_without_trailing_comma | b'1 2 3\n' | print(1, 2, 3, file=sys.stderr) | b'1 2 3\n' | True | 250 | 251 | 254 | 251 | 265 | 254.2
-test_with_trailing_comma | b'1 2' | print(1, 2, end=' ', file=sys.stderr) | b'1 2 ' | False | 256 | 266 | 248 | 255 | 248 | 254.6
-test_no_trailing_comma | b'2\n' | print(1+1, file=sys.stderr) | b'2\n' | True | 255 | 256 | 262 | 251 | 253 | 255.4
-test_spaces_before_file | b'\n' | print(file=sys.stderr) | b'\n' | True | 248 | 250 | 258 | 256 | 265 | 255.4
+test_1 | b'1 2 3\n' | print(1, 1+1, 1+1+1) | b'1 2 3\n' | True | 203 | 226 | 233 | 208 | 198 | 213.6
+test_2 | b'1 2\n' | print(1, 2) | b'1 2\n' | True | 204 | 201 | 203 | 223 | 224 | 211.0
+test_3 | b'\n' | print() | b'\n' | True | 207 | 198 | 205 | 200 | 200 | 202.0
+test_4 | b'1\n\n' | print(1); print() | b'1\n\n' | True | 203 | 216 | 200 | 219 | 224 | 212.4
+test_5 | b'\n1\n' | print(); print(1); | b'\n1\n' | True | 313 | 257 | 229 | 315 | 340 | 290.8
+test_prefix_preservation | b'1 2 3\n' | print(1,   1+1,   1+1+1) | b'1 2 3\n' | True | 235 | 275 | 205 | 200 | 230 | 229.0
+test_trailing_comma_1 | b'1 2 3\n' | print(1, 2, 3, end=' ') | b'1 2 3 ' | False | 237 | 210 | 208 | 208 | 355 | 243.6
+test_trailing_comma_2 | b'1 2\n' | print(1, 2, end=' ') | b'1 2 ' | False | 397 | 338 | 259 | 203 | 257 | 290.8
+test_trailing_comma_3 | b'1\n' | print(1, end=' ') | b'1 ' | False | 272 | 206 | 402 | 203 | 216 | 259.8
+test_tuple | b'' | print((a, b, c)) | b'' | True | 220 | 228 | 216 | 211 | 208 | 216.6
+test_idempotency-1 | b'()\n' | print() | b'\n' | False | 207 | 249 | 248 | 210 | 206 | 224.0
+test_idempotency-2 | b'\n' | print('') | b'\n' | True | 211 | 206 | 204 | 204 | 206 | 206.2
+test_vargs_without_trailing_comma | b'1 2 3\n' | print(1, 2, 3, file=sys.stderr) | b'1 2 3\n' | True | 229 | 206 | 204 | 204 | 228 | 214.2
+test_with_trailing_comma | b'1 2' | print(1, 2, end=' ', file=sys.stderr) | b'1 2 ' | False | 214 | 206 | 204 | 202 | 207 | 206.6
+test_no_trailing_comma | b'2\n' | print(1+1, file=sys.stderr) | b'2\n' | True | 203 | 215 | 205 | 208 | 201 | 206.4
+test_spaces_before_file | b'\n' | print(file=sys.stderr) | b'\n' | True | 204 | 205 | 207 | 202 | 234 | 210.4
