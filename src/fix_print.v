@@ -154,7 +154,8 @@ end.
 
 Definition transpile (l : list tree) : string := concat_strings (map to_string (fix_print l)).
 
-Definition test_prefix_preservation := transpile [LEAF (NAME "print") ; LEAF (NUMBER "1") ; LEAF COMMA ; LEAF (NUMBER "1") ; LEAF PLUS ; LEAF (NUMBER "1") ; LEAF COMMA ; LEAF (NUMBER "1") ; LEAF PLUS ; LEAF (NUMBER "1") ; LEAF PLUS ; LEAF (NUMBER "1")].
+Definition test := transpile [LEAF (NAME "print") ; LEAF RIGHTSHIFT ; LEAF (NAME "sys.stderr")].
+Compute test.
 
-Extraction "test_prefix_preservation.ml" test_prefix_preservation.
+Extraction "/home/tsundoiii/Projects/transpyler/src/tests/test_spaces_before_file.ml" test.
 
