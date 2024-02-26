@@ -133,10 +133,13 @@ Definition fix_print (l : list tree) : list tree :=
   match l with
   | LEAF (NAME "print") :: n => LEAF (NAME "print") :: LEAF LPAR ::
     (match n with
-    | LEAF RIGHTSHIFT :: LEAF (NAME f) :: LEAF COMMA :: n' => 
+    | LEAF RIGHTSHIFT :: LEAF (NAME f) :: n' => 
       match rev n' with
       | LEAF COMMA :: n'' => rev n'' ++ [LEAF COMMA ; LEAF (NAME "end") ; LEAF EQUAL ; LEAF (STRING " ") ; LEAF COMMA; LEAF (NAME "file") ; LEAF EQUAL ; LEAF (NAME f)]
-      | _ => n' ++ [LEAF COMMA; LEAF (NAME "file") ; LEAF EQUAL ; LEAF (NAME f)]
+      | _ => match n' with
+             | LEAF COMMA :: n'' => n' ++ [LEAF COMMA; LEAF (NAME "file") ; LEAF EQUAL ; LEAF (NAME f)]
+             | _ => n' ++ [LEAF (NAME "file") ; LEAF EQUAL ; LEAF (NAME f)]
+             end
       end
     | _ => match rev n with
       | LEAF COMMA :: n' => rev n' ++ [LEAF COMMA ; LEAF (NAME "end") ; LEAF EQUAL ; LEAF (STRING " ")]
@@ -146,7 +149,14 @@ Definition fix_print (l : list tree) : list tree :=
   | _ => l
   end.
 
-Definition node_to_list (n : tree) : list tree :=
+Lemma fix_print_correctness : forall n : list tree,  nth 0 (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF (NAME "print") /\ nth 1 ((fix_print (LEAF (NAME "print") :: n))) (NODE []) = LEAF LPAR /\ last (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF RPAR.
+Proof.
+destruct n ; split ; split ; trivial.
+induction t, l.
+induction n as [|n' IHn].
+- simpl. reflexivity.
+- rewrite IHIHn.
+(**Definition node_to_list (n : tree) : list tree :=
 match n with
 | NODE l => l
 | _ => []
