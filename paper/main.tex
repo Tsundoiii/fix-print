@@ -1,6 +1,14 @@
 \documentclass[sigplan, nonacm, screen, natbib=false]{acmart}
 \RequirePackage[datamodel=acmdatamodel,style=acmnumeric]{biblatex}
+\RequirePackage{listings}
+\RequirePackage{xcolor}
 \addbibresource{bibliography.bib}
+
+\lstdefinestyle{pythonstyle}{
+    keywordstyle=\color{orange},
+    stringstyle=\color{green},
+    basicstyle=\ttfamily\small
+}
 
 \title{Formal Verification of a Python 2 to 3 Transpiler}
 
