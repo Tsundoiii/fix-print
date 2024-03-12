@@ -2,7 +2,7 @@
 \label{appendix:Data}
 \subsection{Computational Accuracy}
 
-\begin{table}[]
+\begin{table}[ht]
     \begin{tabular}{@{}l|llll@{}}
     \toprule
     Test                                  & 2to3 Translation                      & Python 2 Output                               & 2to3 Translation Output                       \\ \hline
@@ -25,7 +25,7 @@
     \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[ht]
     \begin{tabular}{@{}l|lll@{}}
     \toprule
     Test                                  & fix\_print Translation                        & Python 2 Output                        & fix\_print Output             \\ \midrule
@@ -47,3 +47,60 @@
     test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(>>sys.stderr)| & \lstinline[language=Python, style=pythonstyle]|b'\n'|                   & Error                         \\ \bottomrule
     \end{tabular}
 \end{table}
+
+\begin{table}[ht]
+    \begin{tabular}{@{}l|lllll@{}}
+    \toprule
+    Translator & Overall Computational Accuracy & Computation Accuracy Without Trailing Comma Tests \\ \midrule
+    2to3       & \multicolumn{1}{l}{0.6875}     & \multicolumn{1}{l}{0.9166666667}                  \\
+    fix\_print & \multicolumn{1}{l}{0.5625}     & \multicolumn{1}{l}{0.75}                          \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Performance}
+
+\begin{table}[h]
+    \begin{tabular}{@{}l|llllll@{}}
+    \cmidrule(r){1-6}
+    Test                                  & 2to3 Run Time 1 (ms) & 2to3 Run Time 2 (ms) & 2to3 Run Time 3 (ms) & 2to3 Run Time 4 (ms) & 2to3 Run Time 5 (ms) & 2to3 Average Run Time (ms) \\ \cmidrule(r){1-6}
+    test\_1                               & 274                  & 307                  & 274                  & 255                  & 255                  & 273                        \\
+    test\_2                               & 246                  & 249                  & 269                  & 253                  & 251                  & 253.6                      \\
+    test\_3                               & 256                  & 261                  & 248                  & 268                  & 278                  & 262.2                      \\ \cmidrule(r){1-6}
+    test\_4                               & 249                  & 252                  & 261                  & 250                  & 257                  & 253.8                      \\
+    test\_5                               & 282                  & 265                  & 255                  & 263                  & 275                  & 268                        \\
+    test\_prefix\_preservation            & 287                  & 285                  & 265                  & 255                  & 247                  & 267.8                      \\
+    test\_trailing\_comma\_1              & 267                  & 263                  & 319                  & 307                  & 293                  & 289.8                      \\
+    test\_trailing\_comma\_2              & 282                  & 262                  & 252                  & 279                  & 278                  & 270.6                      \\
+    test\_trailing\_comma\_3              & 291                  & 252                  & 267                  & 300                  & 289                  & 279.8                      \\
+    test\_tuple                           & 255                  & 252                  & 271                  & 269                  & 253                  & 260                        \\
+    test\_idempotency\_1                  & 262                  & 276                  & 273                  & 274                  & 284                  & 273.8                      \\
+    test\_idempotency\_2                  & 316                  & 265                  & 273                  & 260                  & 291                  & 281                        \\
+    test\_vargs\_without\_trailing\_comma & 266                  & 279                  & 331                  & 275                  & 329                  & 296                        \\
+    test\_with\_trailing\_comma           & 295                  & 265                  & 281                  & 282                  & 254                  & 275.4                      \\
+    test\_no\_trailing\_comma             & 255                  & 260                  & 314                  & 337                  & 285                  & 290.2                      \\
+    test\_spaces\_before\_file            & 268                  & 329                  & 257                  & 276                  & 322                  & 290.4                     
+    \end{tabular}
+\end{table}
+
+\begin{table}[]
+    \begin{tabular}{@{}lllllll@{}}
+    \cmidrule(r){1-6}
+    Test                                  & fix\_print Run Time 1 (ms) & fix\_print Run Time 2 (ms) & fix\_print Run Time 3 (ms) & fix\_print Run Time 4 (ms) & fix\_print Run Time 5 (ms) & fix\_print Average Run Time (ms) \\ \cmidrule(r){1-6}
+    test\_1                               & 3                          & 5                          & 4                          & 5                          & 5                          & 4.4                              \\
+    test\_2                               & 3                          & 3                          & 3                          & 4                          & 5                          & 3.6                              \\
+    test\_3                               & 3                          & 4                          & 3                          & 4                          & 5                          & 3.8                              \\ \cmidrule(r){1-6}
+    test\_4                               & 3                          & 4                          & 3                          & 4                          & 4                          & 3.6                              \\
+    test\_5                               & 4                          & 4                          & 3                          & 4                          & 3                          & 3.6                              \\
+    test\_prefix\_preservation            & 3                          & 4                          & 4                          & 4                          & 5                          & 4                                \\
+    test\_trailing\_comma\_1              & 5                          & 5                          & 4                          & 4                          & 5                          & 4.6                              \\
+    test\_trailing\_comma\_2              & 4                          & 4                          & 5                          & 3                          & 3                          & 3.8                              \\
+    test\_trailing\_comma\_3              & 4                          & 4                          & 5                          & 4                          & 5                          & 4.4                              \\
+    test\_tuple                           & 3                          & 5                          & 3                          & 3                          & 6                          & 4                                \\
+    test\_idempotency\_1                  & 6                          & 5                          & 3                          & 5                          & 3                          & 4.4                              \\
+    test\_idempotency\_2                  & 3                          & 3                          & 6                          & 4                          & 5                          & 4.2                              \\
+    test\_vargs\_without\_trailing\_comma & 4                          & 4                          & 3                          & 4                          & 3                          & 3.6                              \\
+    test\_with\_trailing\_comma           & 3                          & 3                          & 5                          & 4                          & 3                          & 3.6                              \\
+    test\_no\_trailing\_comma             & 3                          & 4                          & 3                          & 3                          & 4                          & 3.4                              \\
+    test\_spaces\_before\_file            & 3                          & 3                          & 4                          & 4                          & 4                          & 3.6                             
+    \end{tabular}
+    \end{table}
