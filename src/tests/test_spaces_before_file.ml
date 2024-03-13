@@ -372,41 +372,28 @@ let fix_print l = match l with
                                                                     | _ -> n)
                                                                     | NODE _ ->
                                                                     n))
-                                                                    | t1 :: l3 ->
+                                                                    | t1 :: n' ->
                                                                     (match t1 with
-                                                                    | LEAF l4 ->
-                                                                    (match l4 with
-                                                                    | NAME f ->
+                                                                    | LEAF l3 ->
                                                                     (match l3 with
-                                                                    | [] ->
-                                                                    (match 
-                                                                    rev n with
-                                                                    | [] -> n
-                                                                    | t2 :: n' ->
-                                                                    (match t2 with
-                                                                    | LEAF l5 ->
-                                                                    (match l5 with
-                                                                    | COMMA ->
-                                                                    app
-                                                                    (rev n')
-                                                                    ((LEAF
-                                                                    COMMA) :: ((LEAF
-                                                                    (NAME
-                                                                    "end")) :: ((LEAF
-                                                                    EQUAL) :: ((LEAF
-                                                                    (STRING
-                                                                    " ")) :: []))))
-                                                                    | _ -> n)
-                                                                    | NODE _ ->
-                                                                    n))
-                                                                    | t2 :: n' ->
-                                                                    (match t2 with
-                                                                    | LEAF l5 ->
-                                                                    (match l5 with
-                                                                    | COMMA ->
+                                                                    | NAME f ->
                                                                     (match 
                                                                     rev n' with
                                                                     | [] ->
+                                                                    (match n' with
+                                                                    | [] ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: [])))
+                                                                    | t2 :: _ ->
+                                                                    (match t2 with
+                                                                    | LEAF l4 ->
+                                                                    (match l4 with
+                                                                    | COMMA ->
                                                                     app n'
                                                                     ((LEAF
                                                                     COMMA) :: ((LEAF
@@ -415,10 +402,26 @@ let fix_print l = match l with
                                                                     EQUAL) :: ((LEAF
                                                                     (NAME
                                                                     f)) :: []))))
-                                                                    | t3 :: n'' ->
-                                                                    (match t3 with
-                                                                    | LEAF l6 ->
-                                                                    (match l6 with
+                                                                    | _ ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: []))))
+                                                                    | NODE _ ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: [])))))
+                                                                    | t2 :: n'' ->
+                                                                    (match t2 with
+                                                                    | LEAF l4 ->
+                                                                    (match l4 with
                                                                     | COMMA ->
                                                                     app
                                                                     (rev n'')
@@ -436,6 +439,20 @@ let fix_print l = match l with
                                                                     (NAME
                                                                     f)) :: []))))))))
                                                                     | _ ->
+                                                                    (match n' with
+                                                                    | [] ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: [])))
+                                                                    | t3 :: _ ->
+                                                                    (match t3 with
+                                                                    | LEAF l5 ->
+                                                                    (match l5 with
+                                                                    | COMMA ->
                                                                     app n'
                                                                     ((LEAF
                                                                     COMMA) :: ((LEAF
@@ -443,90 +460,94 @@ let fix_print l = match l with
                                                                     "file")) :: ((LEAF
                                                                     EQUAL) :: ((LEAF
                                                                     (NAME
-                                                                    f)) :: [])))))
+                                                                    f)) :: []))))
+                                                                    | _ ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: []))))
                                                                     | NODE _ ->
                                                                     app n'
                                                                     ((LEAF
-                                                                    COMMA) :: ((LEAF
                                                                     (NAME
                                                                     "file")) :: ((LEAF
                                                                     EQUAL) :: ((LEAF
                                                                     (NAME
                                                                     f)) :: []))))))
+                                                                    | NODE _ ->
+                                                                    (match n' with
+                                                                    | [] ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: [])))
+                                                                    | t3 :: _ ->
+                                                                    (match t3 with
+                                                                    | LEAF l4 ->
+                                                                    (match l4 with
+                                                                    | COMMA ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    COMMA) :: ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: []))))
+                                                                    | _ ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: []))))
+                                                                    | NODE _ ->
+                                                                    app n'
+                                                                    ((LEAF
+                                                                    (NAME
+                                                                    "file")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (NAME
+                                                                    f)) :: [])))))))
                                                                     | _ ->
                                                                     (match 
                                                                     rev n with
                                                                     | [] -> n
-                                                                    | t3 :: n'0 ->
-                                                                    (match t3 with
-                                                                    | LEAF l6 ->
-                                                                    (match l6 with
-                                                                    | COMMA ->
-                                                                    app
-                                                                    (rev n'0)
-                                                                    ((LEAF
-                                                                    COMMA) :: ((LEAF
-                                                                    (NAME
-                                                                    "end")) :: ((LEAF
-                                                                    EQUAL) :: ((LEAF
-                                                                    (STRING
-                                                                    " ")) :: []))))
-                                                                    | _ -> n)
-                                                                    | NODE _ ->
-                                                                    n)))
-                                                                    | NODE _ ->
-                                                                    (match 
-                                                                    rev n with
-                                                                    | [] -> n
-                                                                    | t3 :: n'0 ->
-                                                                    (match t3 with
-                                                                    | LEAF l5 ->
-                                                                    (match l5 with
-                                                                    | COMMA ->
-                                                                    app
-                                                                    (rev n'0)
-                                                                    ((LEAF
-                                                                    COMMA) :: ((LEAF
-                                                                    (NAME
-                                                                    "end")) :: ((LEAF
-                                                                    EQUAL) :: ((LEAF
-                                                                    (STRING
-                                                                    " ")) :: []))))
-                                                                    | _ -> n)
-                                                                    | NODE _ ->
-                                                                    n))))
-                                                                    | _ ->
-                                                                    (match 
-                                                                    rev n with
-                                                                    | [] -> n
-                                                                    | t2 :: n' ->
-                                                                    (match t2 with
-                                                                    | LEAF l5 ->
-                                                                    (match l5 with
-                                                                    | COMMA ->
-                                                                    app
-                                                                    (rev n')
-                                                                    ((LEAF
-                                                                    COMMA) :: ((LEAF
-                                                                    (NAME
-                                                                    "end")) :: ((LEAF
-                                                                    EQUAL) :: ((LEAF
-                                                                    (STRING
-                                                                    " ")) :: []))))
-                                                                    | _ -> n)
-                                                                    | NODE _ ->
-                                                                    n)))
-                                                                    | NODE _ ->
-                                                                    (match 
-                                                                    rev n with
-                                                                    | [] -> n
-                                                                    | t2 :: n' ->
+                                                                    | t2 :: n'0 ->
                                                                     (match t2 with
                                                                     | LEAF l4 ->
                                                                     (match l4 with
                                                                     | COMMA ->
                                                                     app
-                                                                    (rev n')
+                                                                    (rev n'0)
+                                                                    ((LEAF
+                                                                    COMMA) :: ((LEAF
+                                                                    (NAME
+                                                                    "end")) :: ((LEAF
+                                                                    EQUAL) :: ((LEAF
+                                                                    (STRING
+                                                                    " ")) :: []))))
+                                                                    | _ -> n)
+                                                                    | NODE _ ->
+                                                                    n)))
+                                                                    | NODE _ ->
+                                                                    (match 
+                                                                    rev n with
+                                                                    | [] -> n
+                                                                    | t2 :: n'0 ->
+                                                                    (match t2 with
+                                                                    | LEAF l3 ->
+                                                                    (match l3 with
+                                                                    | COMMA ->
+                                                                    app
+                                                                    (rev n'0)
                                                                     ((LEAF
                                                                     COMMA) :: ((LEAF
                                                                     (NAME
@@ -627,6 +648,5 @@ let transpile l =
 let test =
   transpile ((LEAF (NAME "print")) :: ((LEAF RIGHTSHIFT) :: ((LEAF (NAME
     "sys.stderr")) :: [])))
-
 
 let () = print_string test
