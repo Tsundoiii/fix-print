@@ -2,63 +2,68 @@
 \label{appendix:Data}
 \subsection{Computational Accuracy}
 
-\begin{table}[ht]
-    \begin{tabular}{@{}l|llll@{}}
-    \toprule
-    Test                                  & 2to3 Translation                      & Python 2 Output                               & 2to3 Translation Output                       \\ \hline
-    test\_1                               & \lstinline[language=Python, style=pythonstyle]|print(1, 1+1, 1+1+1)                 | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\ 
-    test\_2                               & \lstinline[language=Python, style=pythonstyle]|print(1, 2)                          | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | \\ 
-    test\_3                               & \lstinline[language=Python, style=pythonstyle]|print()                              | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\ 
-    test\_4                               & \lstinline[language=Python, style=pythonstyle]|print(1); print()                    | & \lstinline[language=Python, style=pythonstyle]|b'1\n\n'| & \lstinline[language=Python, style=pythonstyle]|b'1\n\n'| \\ 
-    test\_5                               & \lstinline[language=Python, style=pythonstyle]|print(); print(1);                   | & \lstinline[language=Python, style=pythonstyle]|b'\n1\n'| & \lstinline[language=Python, style=pythonstyle]|b'\n1\n'| \\ 
-    test\_prefix\_preservation            & \lstinline[language=Python, style=pythonstyle]|print(1,   1+1,   1+1+1)             | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\ 
-    test\_trailing\_comma\_1              & \lstinline[language=Python, style=pythonstyle]|print(1, 2, 3, end=' ')              | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3 '                             | \\ 
-    test\_trailing\_comma\_2              & \lstinline[language=Python, style=pythonstyle]|print(1, 2, end=' ')                 | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | & \lstinline[language=Python, style=pythonstyle]|b'1 2 '                               | \\ 
-    test\_trailing\_comma\_3              & \lstinline[language=Python, style=pythonstyle]|print(1, end=' ')                    | & \lstinline[language=Python, style=pythonstyle]|b'1\n'                 | & \lstinline[language=Python, style=pythonstyle]|b'1 '                                 | \\ 
-    test\_tuple                           & \lstinline[language=Python, style=pythonstyle]|print((1, 2, 3))                     | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'         | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'         | \\ 
-    test\_idempotency\_1                  & \lstinline[language=Python, style=pythonstyle]|print()                              | & \lstinline[language=Python, style=pythonstyle]|b'()\n'                | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\ 
-    test\_idempotency\_2                  & \lstinline[language=Python, style=pythonstyle]|print('')                            | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\ 
-    test\_vargs\_without\_trailing\_comma & \lstinline[language=Python, style=pythonstyle]|print(1, 2, 3, file=sys.stderr)      | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\ 
-    test\_with\_trailing\_comma           & \lstinline[language=Python, style=pythonstyle]|print(1, 2, end=' ', file=sys.stderr)| & \lstinline[language=Python, style=pythonstyle]|b'1 2'                                | & \lstinline[language=Python, style=pythonstyle]|b'1 2 '                               | \\ 
-    test\_no\_trailing\_comma             & \lstinline[language=Python, style=pythonstyle]|print(1+1, file=sys.stderr)          | & \lstinline[language=Python, style=pythonstyle]|b'2\n'                 | & \lstinline[language=Python, style=pythonstyle]|b'2\n'                 | \\ 
-    test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(file=sys.stderr)               | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\ \bottomrule
-    \end{tabular}
-    \caption{2to3 translation and output of translated code for each test.}
-\end{table}
-
-\begin{table}[ht]
+\begin{table*}[ht]
+    \centering
     \begin{tabular}{@{}l|lll@{}}
     \toprule
-    Test                                  & fix\_print Translation                        & Python 2 Output                        & fix\_print Output             \\ \midrule
-    test\_1                               & \lstinline[language=Python, style=pythonstyle]|print(1,1+1,1+1+1)                           | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'   |           & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    | \\
-    test\_2                               & \lstinline[language=Python, style=pythonstyle]|print(1,2)                                   | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'  |              & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'      | \\
-    test\_3                               & \lstinline[language=Python, style=pythonstyle]|print()                                      | & \lstinline[language=Python, style=pythonstyle]|b'\n'   |                & \lstinline[language=Python, style=pythonstyle]|b'\n'         | \\
-    test\_4                               & \lstinline[language=Python, style=pythonstyle]|print(1;print)                               | & \lstinline[language=Python, style=pythonstyle]|b'1\n\n'| & Error                         \\
-    test\_5                               & \lstinline[language=Python, style=pythonstyle]|print(;print1;)                              | & \lstinline[language=Python, style=pythonstyle]|b'\n1\n'| & Error                         \\
-    test\_prefix\_preservation            & \lstinline[language=Python, style=pythonstyle]|print(1,1+1,1+1+1)                           | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n' |             & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    | \\
-    test\_trailing\_comma\_1              & \lstinline[language=Python, style=pythonstyle]|print(1,2,3,end=' ')                         | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'  |            & \lstinline[language=Python, style=pythonstyle]|b'1 2 3 '     |                \\
-    test\_trailing\_comma\_2              & \lstinline[language=Python, style=pythonstyle]|print(1,2,end=' ')                           | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'   |             & \lstinline[language=Python, style=pythonstyle]|b'1 2 '       |                \\
-    test\_trailing\_comma\_3              & \lstinline[language=Python, style=pythonstyle]|print(1,end=' ')                             | & \lstinline[language=Python, style=pythonstyle]|b'1\n'  |                & \lstinline[language=Python, style=pythonstyle]|b'1 '         |                \\
-    test\_tuple                           & \lstinline[language=Python, style=pythonstyle]|print((1,2,3))                               | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'  |        & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'| \\
-    test\_idempotency\_1                  & \lstinline[language=Python, style=pythonstyle]|print(())                                    | & \lstinline[language=Python, style=pythonstyle]|b'()\n'   |              & \lstinline[language=Python, style=pythonstyle]|b'()\n'       | \\
-    test\_idempotency\_2                  & \lstinline[language=Python, style=pythonstyle]|print((''))                                  | & \lstinline[language=Python, style=pythonstyle]|b'\n' |                  & \lstinline[language=Python, style=pythonstyle]|b'\n'         | \\
-    test\_vargs\_without\_trailing\_comma & \lstinline[language=Python, style=pythonstyle]|print(1,2,3,file=sys.stderr)                 | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    |          & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    | \\
-    test\_with\_trailing\_comma           & \lstinline[language=Python, style=pythonstyle]|print(1,2,end=' ',file=sys.stderr)           | & \lstinline[language=Python, style=pythonstyle]|b'1 2'|                                 & \lstinline[language=Python, style=pythonstyle]|b'1 2 '       |                \\
-    test\_no\_trailing\_comma             & \lstinline[language=Python, style=pythonstyle]|print(1+1,file=sys.stderr)                   | & \lstinline[language=Python, style=pythonstyle]|b'2\n' |                 & \lstinline[language=Python, style=pythonstyle]|b'2\n'        | \\
-    test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(>>sys.stderr)| & \lstinline[language=Python, style=pythonstyle]|b'\n'|                   & Error                         \\ \bottomrule
+    Test                                  & 2to3 Translation                      & 2to3 Output                            & 2to3 Output Correct \\ \midrule
+    test\_1                               & \lstinline[language=Python, style=pythonstyle]|print(1, 1+1, 1+1+1)                 | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'  |            & True                \\
+    test\_2                               & \lstinline[language=Python, style=pythonstyle]|print(1, 2)                          | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'   |             & True                \\
+    test\_3                               & \lstinline[language=Python, style=pythonstyle]|print()                              | & \lstinline[language=Python, style=pythonstyle]|b'\n'    |               & True                \\
+    test\_4                               & \lstinline[language=Python, style=pythonstyle]|print(1); print()                    | & \lstinline[language=Python, style=pythonstyle]|b'1\n\n' |& True                \\
+    test\_5                               & \lstinline[language=Python, style=pythonstyle]|print(); print(1);                   | & \lstinline[language=Python, style=pythonstyle]|b'\n1\n' |& True                \\
+    test\_prefix\_preservation            & \lstinline[language=Python, style=pythonstyle]|print(1,   1+1,   1+1+1)             | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'  |            & True                \\
+    test\_trailing\_comma\_1              & \lstinline[language=Python, style=pythonstyle]|print(1, 2, 3, end=' ')              | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3 '   |                           & False               \\
+    test\_trailing\_comma\_2              & \lstinline[language=Python, style=pythonstyle]|print(1, 2, end=' ')                 | & \lstinline[language=Python, style=pythonstyle]|b'1 2 '  |                              & False               \\
+    test\_trailing\_comma\_3              & \lstinline[language=Python, style=pythonstyle]|print(1, end=' ')                    | & \lstinline[language=Python, style=pythonstyle]|b'1 '        |                          & False               \\
+    test\_tuple                           & \lstinline[language=Python, style=pythonstyle]|print((1, 2, 3))                     | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'  |        & True                \\
+    test\_idempotency\_1                  & \lstinline[language=Python, style=pythonstyle]|print()                              | & \lstinline[language=Python, style=pythonstyle]|b'\n'     |              & False               \\
+    test\_idempotency\_2                  & \lstinline[language=Python, style=pythonstyle]|print('')                            | & \lstinline[language=Python, style=pythonstyle]|b'\n'        |           & True                \\
+    test\_vargs\_without\_trailing\_comma & \lstinline[language=Python, style=pythonstyle]|print(1, 2, 3, file=sys.stderr)      | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'  |            & True                \\
+    test\_with\_trailing\_comma           & \lstinline[language=Python, style=pythonstyle]|print(1, 2, end=' ', file=sys.stderr)| & \lstinline[language=Python, style=pythonstyle]|b'1 2 '    |                            & False               \\
+    test\_no\_trailing\_comma             & \lstinline[language=Python, style=pythonstyle]|print(1+1, file=sys.stderr)          | & \lstinline[language=Python, style=pythonstyle]|b'2\n'    |             & True                \\
+    test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(file=sys.stderr)               | & \lstinline[language=Python, style=pythonstyle]|b'\n'   |                & True                \\ \bottomrule
+    \end{tabular}
+    \caption{2to3 translation and output of translated code for each test.}
+    \label{tab:2to3-accuracy}
+\end{table*}
+
+\begin{table*}[ht]
+    \centering
+    \begin{tabular}{@{}l|lll@{}}
+    \toprule
+    Test                                  & fix\_print Translation             & fix\_print Output             & fix\_print Output Correct \\ \midrule
+    test\_1                               & \lstinline[language=Python, style=pythonstyle]|print(1,1+1,1+1+1)                | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    | & True                      \\
+    test\_2                               & \lstinline[language=Python, style=pythonstyle]|print(1,2)                        | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'      | & True                      \\
+    test\_3                               & \lstinline[language=Python, style=pythonstyle]|print()                           | & \lstinline[language=Python, style=pythonstyle]|b'\n'         | & True                      \\
+    test\_4                               & \lstinline[language=Python, style=pythonstyle]|print(1;print)                    | & \lstinline[language=Python, style=pythonstyle]|b''           |                & False                     \\
+    test\_5                               & \lstinline[language=Python, style=pythonstyle]|print(;print1;)                   | & \lstinline[language=Python, style=pythonstyle]|b''           |                & False                     \\
+    test\_prefix\_preservation            & \lstinline[language=Python, style=pythonstyle]|print(1,1+1,1+1+1)                | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    | & True                      \\
+    test\_trailing\_comma\_1              & \lstinline[language=Python, style=pythonstyle]|print(1,2,3,end=' ')              | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3 '     |                & False                     \\
+    test\_trailing\_comma\_2              & \lstinline[language=Python, style=pythonstyle]|print(1,2,end=' ')                | & \lstinline[language=Python, style=pythonstyle]|b'1 2 '       |                & False                     \\
+    test\_trailing\_comma\_3              & \lstinline[language=Python, style=pythonstyle]|print(1,end=' ')                  | & \lstinline[language=Python, style=pythonstyle]|b'1 '         |                & False                     \\
+    test\_tuple                           & \lstinline[language=Python, style=pythonstyle]|print((1,2,3))                    | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'| & True                      \\
+    test\_idempotency\_1                  & \lstinline[language=Python, style=pythonstyle]|print(())                         | & \lstinline[language=Python, style=pythonstyle]|b'()\n'       | & True                      \\
+    test\_idempotency\_2                  & \lstinline[language=Python, style=pythonstyle]|print((''))                       | & \lstinline[language=Python, style=pythonstyle]|b'\n'         | & True                      \\
+    test\_vargs\_without\_trailing\_comma & \lstinline[language=Python, style=pythonstyle]|print(1,2,3,file=sys.stderr)      | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'    | & True                      \\
+    test\_with\_trailing\_comma           & \lstinline[language=Python, style=pythonstyle]|print(1,2,end=' ',file=sys.stderr)| & \lstinline[language=Python, style=pythonstyle]|b'1 2 '       |                & False                     \\
+    test\_no\_trailing\_comma             & \lstinline[language=Python, style=pythonstyle]|print(1+1,file=sys.stderr)        | & \lstinline[language=Python, style=pythonstyle]|b'2\n'        | & True                      \\
+    test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(file=sys.stderr)            | & \lstinline[language=Python, style=pythonstyle]|b'\n'         | & True                      \\ \bottomrule
     \end{tabular}
     \caption{fix\_print translation and output of translated code for each test.}
-\end{table}
+    \label{tab:fix_print-accuracy}
+\end{table*}
 
 \subsection{Performance}
 
-\begin{table}[h]
-    \begin{tabular}{@{}l|llllll@{}}
-    \cmidrule(r){1-6}
-    Test                                  & 2to3 Run Time 1 (ms) & 2to3 Run Time 2 (ms) & 2to3 Run Time 3 (ms) & 2to3 Run Time 4 (ms) & 2to3 Run Time 5 (ms) & 2to3 Mean Run Time (ms) \\ \cmidrule(r){1-6}
+\begin{table*}[ht]
+    \centering
+    \begin{tabular}{@{}l|p{5em}p{5em}p{5em}p{5em}p{5em}p{5em}@{}}
+    \toprule
+    Test                                  & 2to3 Run Time 1 (ms) & 2to3 Run Time 2 (ms) & 2to3 Run Time 3 (ms) & 2to3 Run Time 4 (ms) & 2to3 Run Time 5 (ms) & 2to3 Mean Run Time (ms) \\ \midrule
     test\_1                               & 274                  & 307                  & 274                  & 255                  & 255                  & 273                        \\
     test\_2                               & 246                  & 249                  & 269                  & 253                  & 251                  & 253.6                      \\
-    test\_3                               & 256                  & 261                  & 248                  & 268                  & 278                  & 262.2                      \\ \cmidrule(r){1-6}
+    test\_3                               & 256                  & 261                  & 248                  & 268                  & 278                  & 262.2                      \\ 
     test\_4                               & 249                  & 252                  & 261                  & 250                  & 257                  & 253.8                      \\
     test\_5                               & 282                  & 265                  & 255                  & 263                  & 275                  & 268                        \\
     test\_prefix\_preservation            & 287                  & 285                  & 265                  & 255                  & 247                  & 267.8                      \\
@@ -70,19 +75,20 @@
     test\_idempotency\_2                  & 316                  & 265                  & 273                  & 260                  & 291                  & 281                        \\
     test\_vargs\_without\_trailing\_comma & 266                  & 279                  & 331                  & 275                  & 329                  & 296                        \\
     test\_with\_trailing\_comma           & 295                  & 265                  & 281                  & 282                  & 254                  & 275.4                      \\
-    test\_no\_trailing\_comma             & 255                  & 260                  & 314                  & 337                  & 285                  & 290.2                      \\
-    test\_spaces\_before\_file            & 268                  & 329                  & 257                  & 276                  & 322                  & 290.4                     
+    test\_no\_trailing\_comma             & 255                  & 260                  & 314                  & 337                  & 285                  & 290.2                      \\ 
+    test\_spaces\_before\_file            & 268                  & 329                  & 257                  & 276                  & 322                  & 290.4                     \\ \bottomrule
     \end{tabular}
     \caption{Run times of 2to3 for each test and their means.}
-\end{table}
+\end{table*}
 
-\begin{table}[]
-    \begin{tabular}{@{}lllllll@{}}
-    \cmidrule(r){1-6}
-    Test                                  & fix\_print Run Time 1 (ms) & fix\_print Run Time 2 (ms) & fix\_print Run Time 3 (ms) & fix\_print Run Time 4 (ms) & fix\_print Run Time 5 (ms) & fix\_print Average Run Time (ms) \\ \cmidrule(r){1-6}
+\begin{table*}[ht]
+    \centering
+    \begin{tabular}{@{}l|p{5em}p{5em}p{5em}p{5em}p{5em}p{5em}@{}}
+    \toprule
+    Test                                  & fix\_print Run Time 1 (ms) & fix\_print Run Time 2 (ms) & fix\_print Run Time 3 (ms) & fix\_print Run Time 4 (ms) & fix\_print Run Time 5 (ms) & fix\_print Average Run Time (ms) \\ \midrule
     test\_1                               & 3                          & 5                          & 4                          & 5                          & 5                          & 4.4                              \\
     test\_2                               & 3                          & 3                          & 3                          & 4                          & 5                          & 3.6                              \\
-    test\_3                               & 3                          & 4                          & 3                          & 4                          & 5                          & 3.8                              \\ \cmidrule(r){1-6}
+    test\_3                               & 3                          & 4                          & 3                          & 4                          & 5                          & 3.8                              \\
     test\_4                               & 3                          & 4                          & 3                          & 4                          & 4                          & 3.6                              \\
     test\_5                               & 4                          & 4                          & 3                          & 4                          & 3                          & 3.6                              \\
     test\_prefix\_preservation            & 3                          & 4                          & 4                          & 4                          & 5                          & 4                                \\
@@ -94,8 +100,8 @@
     test\_idempotency\_2                  & 3                          & 3                          & 6                          & 4                          & 5                          & 4.2                              \\
     test\_vargs\_without\_trailing\_comma & 4                          & 4                          & 3                          & 4                          & 3                          & 3.6                              \\
     test\_with\_trailing\_comma           & 3                          & 3                          & 5                          & 4                          & 3                          & 3.6                              \\
-    test\_no\_trailing\_comma             & 3                          & 4                          & 3                          & 3                          & 4                          & 3.4                              \\
-    test\_spaces\_before\_file            & 3                          & 3                          & 4                          & 4                          & 4                          & 3.6                             
+    test\_no\_trailing\_comma             & 3                          & 4                          & 3                          & 3                          & 4                          & 3.4                              \\ 
+    test\_spaces\_before\_file            & 3                          & 3                          & 4                          & 4                          & 4                          & 3.6                             \\ \bottomrule
     \end{tabular}
     \caption{Run times of fix\_print for each test and their means.}
-\end{table}
+\end{table*}

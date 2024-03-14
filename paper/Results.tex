@@ -1,25 +1,65 @@
 \section{Results}
 
 \subsection{Accuracy}
-\begin{table*}[ht]
+\begin{table*}[hbt!]
+    \centering
     \begin{tabular}{@{}l|lll@{}}
     \toprule
-    Translator & Overall Computational Accuracy & Computation Accuracy Without Trailing Comma Tests & Computation Accuracy Without Trailing Comma and Multiple Print Statements Tests \\ \midrule
+    Translator & Overall & Without Trailing Comma Tests & Without Trailing Comma and Multiple Print Statements Tests \\ \midrule
     2to3       & 0.69                         & 0.92                                      & 0.90                                                                             \\
-    fix\_print & 0.62                          & 0.83                                      & 1.0                                                                               \\ \bottomrule
+    fix\_print & 0.62                          & 0.83                                      & 1.00                                                                               \\ \bottomrule
     \end{tabular}
     \caption{Computational accuracy of 2to3 and fix\_print.}
+    \label{tab:accuracies}
 \end{table*}
 
-Overall, when all tests are taken into consideration, 2to3 outperforms fix\_print in terms of computational accuracy, although the two translators are fairly close in accuracy.
+Overall, the findings suggest that 2to3 outperforms fix\_print in terms of computational accuracy, although the two translators proved fairly close in accuracy, as seen in Table \ref{tab:accuracies}.
 
-However, during testing, it was discovered that the version of Python 2 (the \verb|python2-bin| package in the Arch User Repository (AUR), a collection of software packages intended for users of the Arch Linux operating system, the platform used during testing) used in testing was bugged. Trailing commas at the end of print statements should result in a newline character --- special character that tells the computer to move to a new line, similar in effect to hitting enter on a keyboard --- not being printed, which is what the Python 2 documentation states is the intended behavior, and which therefore both 2to3 and fix\_print attempt to replicate when translating. However, the version of Python 2 used outputted a newline character even when a trailing comma was present, contrary to its documented behavior, thus rendering otherwise correct translation from both translators incorrect. Therefore, for more accurate results, the accuracy of both translators excluding tests with trailing commas was calculated as well.
+However, during testing, it was discovered that the version of Python 2 (the \verb|python2-bin| package in the Arch User Repository (AUR), a collection of software packages intended for users of the Arch Linux operating system, the platform used during testing) used in testing was bugged. Trailing commas at the end of print statements should result in a newline character --- a special character that tells the computer to move to a new line, similar in effect to hitting enter on a keyboard --- not being printed. The Python 2 documentation states that is the intended behavior, and therefore both 2to3 and fix\_print attempt to replicate that when translating. However, the version of Python 2 used outputted a newline character even when a trailing comma was present, contrary to its documented behavior, thus rendering otherwise correct translations from both translators incorrect. A version of Python 2 obtained directly from the official Python website was also tested, however that version exhibited the same incorrect behavior as the version from the AUR, thus it was not used for data collection. Therefore, for more accurate results, the accuracy of both translators excluding tests with trailing commas was calculated as well.
 
-Excluding the trailing comma tests, 2to3 was still more accurate than fix\_print. However, there were two tests that were unique within the test suite, as they contained multiple print statements instead of the one a single one, as every other test did. As fix\_print was only specified to translate single print statements, it naturally produced an incorrect translation for these two tests. However, when these two tests are excluded, fix\_print actually attains a higher accuracy than 2to3, due to the fact that 2to3 failed the \verb|test\_idempotency| test where fix\_print did not. In Python 2, "print ()" outputs "()", as the empty parenthesis represent an empty tuple, which is a special type of list in Python. To replicate this behavior, the correct Python 3 translation should be "print(())", as Python 3 print statements require an extra pair of parentheses around whatever content is to be outputted. fix\_print is specified to always do as such, however in this case 2to3 translated "print ()" as "print()", which is incorrect as its translate simply prints nothing, as there is no content within the parentheses.
+Excluding the trailing comma tests, 2to3 was still more accurate than fix\_print. However, there were two tests that were unique within the test suite, as they contained multiple print statements instead of the only a single one, as every other test did. As fix\_print was only specified to translate single print statements, it naturally produced incorrect translations for these two tests. Excluding these two tests, fix\_print attained a higher accuracy than 2to3, due to the fact that 2to3 failed the \verb|test_idempotency_1| test where fix\_print did not, as seen in Tables \ref{tab:2to3-accuracy} and \ref{tab:fix_print-accuracy}. In Python 2, "print ()" outputs "()", as the empty parenthesis represent an empty tuple, which is a special type of list in Python. To replicate this behavior, the correct Python 3 translation should be "print(())", as Python 3 print statements require an extra pair of parentheses around whatever content is to be outputted. fix\_print is specified to always do as such, however in this case 2to3 translated "print ()" as "print()", which is incorrect as that translation simply prints nothing, as there is no content within the parentheses.
 
-** Discussion about FV effectivesness here
+Taking this all into consideration, overall the hypothesis that a formally verified transpiler would be more computationally accurate than a non-formally verified transpiler is not supported. However, when limited to tests that are within the specification of fix\_print, the hypothesis becomes supported.
+
+** Discussion about FV effectiveness here and how formal verification is only as good as its specification
 
 \subsection{Performance}
+\pgfplotstableread[row sep=\\,col sep=&]{
+    Test                                  & 2to3 Average Run Time (ms) & fix\_print Average Run Time (ms) \\
+    test\_1                               & 273                        & 4.4                              \\
+    test\_2                               & 253.6                      & 3.6                              \\
+    test\_3                               & 262.2                      & 3.8                              \\
+    test\_4                               & 253.8                      & 3.6                              \\
+    test\_5                               & 268                        & 3.6                              \\
+    test\_prefix\_preservation            & 267.8                      & 4                                \\
+    test\_trailing\_comma\_1              & 289.8                      & 4.6                              \\
+    test\_trailing\_comma\_2              & 270.6                      & 3.8                              \\
+    test\_trailing\_comma\_3              & 279.8                      & 4.4                              \\
+    test\_tuple                           & 260                        & 4                                \\
+    test\_idempotency\_1                  & 273.8                      & 4.4                              \\
+    test\_idempotency\_2                  & 281                        & 4.2                              \\
+    test\_vargs\_without\_trailing\_comma & 296                        & 3.6                              \\
+    test\_with\_trailing\_comma           & 275.4                      & 3.6                              \\
+    test\_no\_trailing\_comma             & 290.2                      & 3.4                              \\
+    test\_spaces\_before\_file            & 290.4                      & 3.6                              \\
+    }\mydata
 
-The performance of fix\_print was much faster than 2to3, with fix\_print being around two orders of magnitude faster than 2to3.
-** Analysis of (lack of) significance of performance data here
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            ylabel={Run Time (ms)},
+            symbolic x coords={test\_1, test\_2, test\_3, test\_4, test\_5, test\_prefix\_preservation, test\_trailing\_comma\_1, test\_trailing\_comma\_2, test\_trailing\_comma\_3, test\_tuple, test\_idempotency\_1, test\_idempotency\_2, test\_vargs\_without\_trailing\_comma, test\_with\_trailing\_comma, test\_no\_trailing\_comma, test\_spaces\_before\_file},
+            xtick=data,
+        ]
+        \addplot table[x=Test,y=2to3 Average Run Time (ms)]{\mydata};
+        \addplot table[x=Test,y=fix\_print Average Run Time (ms)]{\mydata};
+        \legend{2to3 Average Run Time (ms), fix\_print Average Run Time (ms)}
+    \end{axis}
+\end{tikzpicture}
+
+
+fix\_print was faster than 2to3 at translation, with fix\_print translating code around two orders of magnitude faster than 2to3. This supports the hypothesis that a formally verified transpiler would perform better than a non-formally verified compiler.
+** Analysis of (lack of) significance of performance data here due to translators being written in different languages
+
+\subsection{Discussion}
+** Analysis of feasibility of formal verification here

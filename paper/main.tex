@@ -2,6 +2,7 @@
 \RequirePackage[datamodel=acmdatamodel,style=acmnumeric]{biblatex}
 \RequirePackage{listings}
 \RequirePackage{xcolor}
+\RequirePackage{pgfplots}
 \addbibresource{bibliography.bib}
 
 \lstdefinestyle{pythonstyle}{
@@ -10,6 +11,8 @@
     basicstyle=\ttfamily\small,
     showstringspaces=false
 }
+
+\pgfplotsset{width=10cm,compat=1.9}
 
 \title{Formal Verification of Translations From Python 2 to 3}
 
