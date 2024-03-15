@@ -25,7 +25,7 @@
     test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(file=sys.stderr)               | & \lstinline[language=Python, style=pythonstyle]|b'\n'   |                & True                \\ \bottomrule
     \end{tabular}
     \caption{2to3 translation and output of translated code for each test.}
-    \label{tab:2to3-accuracy}
+    \label{table:2to3-accuracy}
 \end{table*}
 
 \begin{table*}[ht]
@@ -51,7 +51,7 @@
     test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print(file=sys.stderr)            | & \lstinline[language=Python, style=pythonstyle]|b'\n'         | & True                      \\ \bottomrule
     \end{tabular}
     \caption{fix\_print translation and output of translated code for each test.}
-    \label{tab:fix_print-accuracy}
+    \label{table:fix_print-accuracy}
 \end{table*}
 
 \subsection{Performance}
@@ -79,6 +79,7 @@
     test\_spaces\_before\_file            & 268                  & 329                  & 257                  & 276                  & 322                  & 290.4                     \\ \bottomrule
     \end{tabular}
     \caption{Run times of 2to3 for each test and their means.}
+    \label{table:2to3-performance}
 \end{table*}
 
 \begin{table*}[ht]
@@ -104,4 +105,5 @@
     test\_spaces\_before\_file            & 3                          & 3                          & 4                          & 4                          & 4                          & 3.6                             \\ \bottomrule
     \end{tabular}
     \caption{Run times of fix\_print for each test and their means.}
+    \label{table:fix_print-performance}
 \end{table*}
