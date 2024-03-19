@@ -64,8 +64,7 @@ Taking this all into consideration, overall the hypothesis that a formally verif
 \end{figure*}
 
 
-fix\_print was faster than 2to3 at translation, with fix\_print translating code around two orders of magnitude faster than 2to3. This supports the hypothesis that a formally verified transpiler would perform better than a non-formally verified compiler.
-** Analysis of (lack of) significance of performance data here due to translators being written in different languages
+fix\_print was faster than 2to3 at translation, with fix\_print translating code around two orders of magnitude faster than 2to3. This supports the hypothesis that a formally verified transpiler would perform better than a non-formally verified compiler. However, it is of vital importance to reemphasize the fact that both transpilers are written in two different programming languages. 2to3 was written in Python, whereas fix\_print is written in Coq, with code extracted to OCaml. Due to the fundamental nature of both languages, programs written in OCaml will nearly always be faster than similar programs written in Python, due to the fact that Python programs are relatively slow due to the nature of how the Python language executes programs compared to other languages [CITE HERE]. Thus, a conclusion that formal verification lead to a performance gain is unwarranted, since the languages that both transpilers were written in affected performance much more than whether formal verification was used or not. However, the data suggests that formal verification is not a significant drag on performance. This lends credibility to advocates of formal verification, as possible performance regressions that might come along with the adoption of formal verification seem to not occur.
 
 \subsection{Discussion}
 ** Analysis of feasibility of formal verification here
