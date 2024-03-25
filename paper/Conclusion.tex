@@ -1,0 +1,8 @@
+\section{Conclusion}
+\subsection{Limitations}
+\subsubsection{Validity}
+The validility of Transpyler rests on the validity of Coq and its code extraction capabilities. Should Coq or its code extraction capabilities be proven flawed, the validility of Transpyler would also be flawed. However, given Coq's extensive history and use in the fields of both mathematics and computer science, such an outcome is unlikely.
+\subsubsection{Scope}
+fix\_print only translates 
+\subsubsection{Tests}
+fix\_print was only tested for computational accuracy against 2to3's test suite, which only includes 16 tests. Although the tests try to model the most common print statement structures found in real code, with such a small number of tests there is likely to be some sort of uncommon structure that is missed in the tests. Since fix\_print was not tested on a codebase of actual 
