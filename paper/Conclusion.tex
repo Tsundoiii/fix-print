@@ -1,8 +1,14 @@
 \section{Conclusion}
 \subsection{Limitations}
+
 \subsubsection{Validity}
-The validility of Transpyler rests on the validity of Coq and its code extraction capabilities. Should Coq or its code extraction capabilities be proven flawed, the validility of Transpyler would also be flawed. However, given Coq's extensive history and use in the fields of both mathematics and computer science, such an outcome is unlikely.
+The validility of Transpyler rests on the validity of Coq and its code extraction capabilities. Should Coq or its code extraction capabilities prove flawed, the validility of Transpyler would also be flawed. However, given Coq's extensive history and use in both mathematics and computer science, such an outcome is unlikely.
+
 \subsubsection{Scope}
-fix\_print only translates 
+Due to time limitations, fix\_print only covered part of 
+
 \subsubsection{Tests}
-fix\_print was only tested for computational accuracy against 2to3's test suite, which only includes 16 tests. Although the tests try to model the most common print statement structures found in real code, with such a small number of tests there is likely to be some sort of uncommon structure that is missed in the tests. Since fix\_print was not tested on a codebase of actual 
+fix\_print was only tested for computational accuracy against 2to3's test suite, which only includes 16 tests. Although the tests try to model the most common print statement structures found in real code, with such a small number of tests there is likely to be some sort of uncommon structure that is missed in the tests. Since fix\_print was not tested on a codebase of actual
+
+\subsection{Future Research}
+Formal verification using the Coq proof assistant was chosen as the method of formal verification for this project due its use in previous research into formally verified code translators \autocite{Leroy}\autocite{Zhao}. As a proof assistant, Coq is based in math as much as it is based in programming, and Coq is frequently used to proven pure mathematical theorems as well as theorems about the correctness of software programs. However, there are other methods of formal verification possible. One example is the Java Modeling Language (JML), an addition to the popular Java programming language that allows Java developers to define specifications for their existing Java code in Java itself \autocite{Burdy}. This is a simpler approach to formal verification for Java developers, since it allows them to write both their code and their specifications in one language, especially important for those working on large Java codebases where switching programming languages for formal verification is infeasible. Another possible approach is Dafny, a programming language designed for formal verification. Dafny is structurally much more similar to traditional programming languages than Coq is, but still 
