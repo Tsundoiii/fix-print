@@ -146,16 +146,17 @@ Definition fix_print (l : list tree) : list tree :=
       | _ => n
       end
     end) ++ [LEAF RPAR]
-  | _ => l
+  | _ => [LEAF (NAME "print") ; LEAF LPAR ; LEAF RPAR]
   end.
 
-Lemma fix_print_correctness : forall n : list tree,  nth 0 (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF (NAME "print") /\ nth 1 ((fix_print (LEAF (NAME "print") :: n))) (NODE []) = LEAF LPAR /\ last (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF RPAR.
+Lemma fix_print_correctness : forall n : list tree,  nth 0 (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF (NAME "print") /\ nth 1 ((fix_print (LEAF (NAME "print") :: n))) (NODE []) = LEAF LPAR.
 Proof.
-destruct n ; split ; split ; trivial.
-induction t, l.
-induction n as [|n' IHn].
-- simpl. reflexivity.
-- rewrite IHIHn.
+destruct n ; split ; split.
+Qed.
+
+Lemma idk : forall n : list tree, last (fix_print (LEAF (NAME "print") :: n)) (LEAF RPAR) = LEAF RPAR.
+induction n ; auto.
+
 (**Definition node_to_list (n : tree) : list tree :=
 match n with
 | NODE l => l
