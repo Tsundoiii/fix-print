@@ -4,22 +4,22 @@
     \begin{tabular}{@{}l|ll@{}}
     \toprule
     Test                                  & Code                                                  & Python 2 Output                        \\ \midrule
-    test\_1                               & \lstinline[language=Python, style=pythonstyle]|print 1, 1+1, 1+1+1                                  | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
-    test\_2                               & \lstinline[language=Python, style=pythonstyle]|print 1, 2                                           | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | \\
-    test\_3                               & \lstinline[language=Python, style=pythonstyle]|print                                                | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\
-    test\_4                               & \lstinline[language=Python, style=pythonstyle]|print 1; print                                       | & \lstinline[language=Python, style=pythonstyle]|b'1\n\n'| \\
-    test\_5                               & \lstinline[language=Python, style=pythonstyle]|print; print 1;                                      | & \lstinline[language=Python, style=pythonstyle]|b'\n1\n'| \\
-    test\_prefix\_preservation            & \lstinline[language=Python, style=pythonstyle]|print 1,   1+1,   1+1+1                              | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
-    test\_trailing\_comma\_1              & \lstinline[language=Python, style=pythonstyle]|print 1, 2, 3,                                       | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
-    test\_trailing\_comma\_2              & \lstinline[language=Python, style=pythonstyle]|print 1, 2,                                          | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | \\
-    test\_trailing\_comma\_3              & \lstinline[language=Python, style=pythonstyle]|print 1,                                             | & \lstinline[language=Python, style=pythonstyle]|b'1\n'                 | \\
-    test\_tuple                           & \lstinline[language=Python, style=pythonstyle]|print (1, 2, 3)                                      | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'         | \\
-    test\_idempotency\_1                  & \lstinline[language=Python, style=pythonstyle]|print()                                              | & \lstinline[language=Python, style=pythonstyle]|b'()\n'                | \\
-    test\_idempotency\_2                  & \lstinline[language=Python, style=pythonstyle]|print('')                                            | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\
-    test\_vargs\_without\_trailing\_comma & \lstinline[language=Python, style=pythonstyle]|print >>sys.stderr, 1, 2, 3| & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
-    test\_with\_trailing\_comma           & \lstinline[language=Python, style=pythonstyle]|print >>sys.stderr, 1, 2,  | & \lstinline[language=Python, style=pythonstyle]|b'1 2'                                | \\
-    test\_no\_trailing\_comma             & \lstinline[language=Python, style=pythonstyle]|print >>sys.stderr, 1+1    | & \lstinline[language=Python, style=pythonstyle]|b'2\n'                 | \\
-    test\_spaces\_before\_file            & \lstinline[language=Python, style=pythonstyle]|print >> sys.stderr          | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\ \bottomrule
+    test-1                               & \lstinline[language=Python, style=pythonstyle]|print 1, 1+1, 1+1+1                                  | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
+    test-2                               & \lstinline[language=Python, style=pythonstyle]|print 1, 2                                           | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | \\
+    test-3                               & \lstinline[language=Python, style=pythonstyle]|print                                                | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\
+    test-4                               & \lstinline[language=Python, style=pythonstyle]|print 1; print                                       | & \lstinline[language=Python, style=pythonstyle]|b'1\n\n'| \\
+    test-5                               & \lstinline[language=Python, style=pythonstyle]|print; print 1;                                      | & \lstinline[language=Python, style=pythonstyle]|b'\n1\n'| \\
+    test-prefix-preservation            & \lstinline[language=Python, style=pythonstyle]|print 1,   1+1,   1+1+1                              | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
+    test-trailing-comma-1              & \lstinline[language=Python, style=pythonstyle]|print 1, 2, 3,                                       | & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
+    test-trailing-comma-2              & \lstinline[language=Python, style=pythonstyle]|print 1, 2,                                          | & \lstinline[language=Python, style=pythonstyle]|b'1 2\n'               | \\
+    test-trailing-comma-3              & \lstinline[language=Python, style=pythonstyle]|print 1,                                             | & \lstinline[language=Python, style=pythonstyle]|b'1\n'                 | \\
+    test-tuple                           & \lstinline[language=Python, style=pythonstyle]|print (1, 2, 3)                                      | & \lstinline[language=Python, style=pythonstyle]|b'(1, 2, 3)\n'         | \\
+    test-idempotency-1                  & \lstinline[language=Python, style=pythonstyle]|print()                                              | & \lstinline[language=Python, style=pythonstyle]|b'()\n'                | \\
+    test-idempotency-2                  & \lstinline[language=Python, style=pythonstyle]|print('')                                            | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\
+    test-vargs-without-trailing-comma & \lstinline[language=Python, style=pythonstyle]|print >>sys.stderr, 1, 2, 3| & \lstinline[language=Python, style=pythonstyle]|b'1 2 3\n'             | \\
+    test-with-trailing-comma           & \lstinline[language=Python, style=pythonstyle]|print >>sys.stderr, 1, 2,  | & \lstinline[language=Python, style=pythonstyle]|b'1 2'                                | \\
+    test-no-trailing-comma             & \lstinline[language=Python, style=pythonstyle]|print >>sys.stderr, 1+1    | & \lstinline[language=Python, style=pythonstyle]|b'2\n'                 | \\
+    test-spaces-before-file            & \lstinline[language=Python, style=pythonstyle]|print >> sys.stderr          | & \lstinline[language=Python, style=pythonstyle]|b'\n'                  | \\ \bottomrule
     \end{tabular}
     \caption{Tests included in the 2to3 test suite, with the Python 2 code to be translated and intended output of that code.}
     \label{table:tests}
