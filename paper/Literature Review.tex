@@ -1,6 +1,18 @@
 \section{Literature Review}
 
 \subsection{Python 2 vs. 3}
+\begin{table*}[b!]
+    \begin{tabular}{@{}l|l@{}}
+    \toprule
+    Python 2             & Python 3              \\ \midrule
+    \lstinline[language=Python, style=pythonstyle]|print "Hello World"|  & \lstinline[language=Python, style=pythonstyle]|print("Hello World")|  \\
+    \lstinline[language=Python, style=pythonstyle]|exec "print (1 + 1)"| & \lstinline[language=Python, style=pythonstyle]|exec("print (1 + 1)")| \\
+    \lstinline[language=Python, style=pythonstyle]|u"Hello World"|       & \lstinline[language=Python, style=pythonstyle]|"Hello World"|\\  \bottomrule      
+    \end{tabular}
+    \caption{A few examples of changes from Python 2 to 3, from differences in the syntax of statements for printing out text to an output and executing Python code within a Python program, to differences in how text itself is stored differently between both versions.}
+    \label{tab:python-2-vs-3}
+\end{table*}
+
 The core of the Python language is a program known as the interpreter, which reads Python source code from a text file or other input source and executes the code as it reads it. A 'version' of the Python language is simply a version of the interpreter, and each new version of the interpreter includes updates that allow the interpreter to read new code syntaxes, as well as other upgrades such as performance boosts. Usually, each new interpreter version is \textit{backwards compatible}, meaning code that executed without issue in the previous version also executes without issue and with the same behavior on the new version \autocite{Malloy}. Backwards compatibility is highly valued due to the high usage of the language, and the PSF usually attempts to maintain backwards compatibility as much as reasonably possible.
 
 However, in December 2008, Python version 3.0 was released. According to the PSF, Python 3.0 was the first ever “intentionally backwards incompatible” release of Python \autocite{vanRossum}. Python 3.0 included numerous syntax changes that meant that the Python 3.0 interpreter was unable to run most code written in Python 2, since it could not recognize the old syntax. According to Guido van Rossum, the creator of Python and head of its development at the time, the purpose of such wide-reaching changes was, “fixing well-known annoyances and warts, and removing a lot of old cruft” \autocite{vanRossum}.

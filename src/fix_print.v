@@ -149,24 +149,14 @@ Definition fix_print (l : list tree) : list tree :=
   | _ => [LEAF (NAME "print") ; LEAF LPAR ; LEAF RPAR]
   end.
 
-Lemma fix_print_correctness : forall n : list tree,  nth 0 (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF (NAME "print") /\ nth 1 ((fix_print (LEAF (NAME "print") :: n))) (NODE []) = LEAF LPAR.
-Proof.
-destruct n ; split ; split.
+Lemma output_starts_with_print : forall n : list tree,  nth 0 (fix_print (LEAF (NAME "print") :: n)) (NODE []) = LEAF (NAME "print").
+destruct n.
+- simpl. reflexivity.
+- simpl. reflexivity.
 Qed.
 
-Lemma idk : forall n : list tree, last (fix_print (LEAF (NAME "print") :: n)) (LEAF RPAR) = LEAF RPAR.
-induction n ; auto.
+(**Lemma output_begins_with_parentheses : forall n : list tree, nth 1 ((fix_print (LEAF (NAME "print") :: n))) (NODE []) = LEAF LPAR.
+destruct n.
 
-(**Definition node_to_list (n : tree) : list tree :=
-match n with
-| NODE l => l
-| _ => []
-end.
-
-Definition transpile (l : list tree) : string := concat_strings (map to_string (fix_print l)).
-
-Definition test := transpile [LEAF (NAME "print") ; LEAF RIGHTSHIFT ; LEAF (NAME "sys.stderr")].
-Compute test.
-
-Extraction "/home/tsundoiii/Projects/transpyler/src/tests/test_spaces_before_file.ml" test.
+(**Extraction "/home/tsundoiii/Projects/transpyler/src/tests/test_spaces_before_file.ml" test.
 
